@@ -1,7 +1,8 @@
 import pandas as pd
 import hashlib, time
+import requests
 
-def get_languages(languages: dict) -> str:
+def get_languages(languages: requests.models.Response) -> str:
     """
     get languages from a dictionary of languages where name doesn't alone into dictionary.\n
 
@@ -54,7 +55,7 @@ def calculate_time_metrics(dataframe: pd.DataFrame) -> str:
     Arguments:
     dataframe: DataFrame that contain a time value in milliseconds.\n
     Return:
-    alculated values as a string
+    calculated values as a string
     """
     sum_time = dataframe['time'].sum()
     avg_time = round(dataframe['time'].mean(),4)
@@ -62,3 +63,22 @@ def calculate_time_metrics(dataframe: pd.DataFrame) -> str:
     max_time = dataframe['time'].max()
 
     return (f"Suma: {sum_time}, Promedio: {avg_time}, Mínimo: {min_time}, Máximo: {max_time}")
+
+def dataframe_to_json_file(data_frame: pd.DataFrame):
+    """
+    takes a dataframe and converts it into json format and then generates a data.json file with this data.\n
+    Arguments:
+    dataframe: DataFrame object.\n
+    Return:
+    finished message and file with the dataframe data
+    """
+
+    dataframe_json= data_frame.to_json(orient= 'records')
+    
+    with open('data.json', 'w') as myFile:
+        try:
+            myFile.write(dataframe_json)
+            print('finished')
+        except:
+            raise "Algo pasó al crear el archivo, vuelve a intentarlo o contacta al administrador."
+    
