@@ -17,7 +17,7 @@
 3. Cree un entorno virtual:
     
     ```bash
-    python3 -m venv <<nombre_entorno>>
+    python3 -m venv .venv
     ```
 4. Active el entorno virual:
     
