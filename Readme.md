@@ -14,9 +14,19 @@
     cd tangelo_challenge
     ```
     
-3. Instale todas las dependencias y cree el entorno virtual con poetry (tener instalado el gestor de dependencias poetry para Python):
+3. Cree un entorno virtual:
     
     ```bash
-    poetry install
+    python3 -m venv <<nombre_entorno>>
     ```
+4. Active el entorno virual:
+    
+    ```bash
+    source .venv/bin/activate
+    ```
+5. Instale las dependencias requeridas:
+    ```bash
+    pip install -r requirements.txt
+    ```
+6. El proyecto está listo para ser usado.
     
