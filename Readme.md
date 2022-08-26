@@ -28,5 +28,6 @@
     ```bash
     pip install -r requirements.txt
     ```
-6. El proyecto está listo para ser usado.
+6. El proyecto está listo para ser usado:
+ - Ejecute el archivo main.py y se generará la base de datos en sqlite, el archivo data.json, la tabla requerida en la consola y los valores de promedio, suma, mínimo y máximo relacionados con la columna tiempo.
     
