@@ -1,6 +1,6 @@
 ## Código de la solución:
 
-[https://github.com/gabrielbarragan/somhta_challenge](https://github.com/gabrielbarragan/somhta_challenge)
+[https://github.com/gabrielbarragan/somhta_challenge](https://github.com/gabrielbarragan/tangelo_challenge)
 
 1. Clone el repositorio.
     
