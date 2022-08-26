@@ -1,11 +1,11 @@
 import requests
 import hashlib
 import time
+import pandas as pd
 
 
-countries_languages = requests.get('https://restcountries.com/v3.1/all')
 
-countries_languages = countries_languages.json()
+countries_languages_data = requests.get('https://restcountries.com/v3.1/all')
 
 def get_languages(languages: dict) -> str:
     """
@@ -21,26 +21,26 @@ def get_languages(languages: dict) -> str:
 
     return all_languages_list_string
 
+def create_dataframe(countries_languages: dict) -> pd.DataFrame:
+    countries_languages = countries_languages.json()
+    id=0
+    countries_dict=[]
+    for country in countries_languages:
+        now = time.time()
+        if country.get('languages', False) is not False:
 
-for country in countries_languages:
-    now = time.time()
-    if country.get('languages', False) is not False:
+            all_languages = get_languages(country['languages'])
+            encrypted_languages= (hashlib.sha1(all_languages.encode('utf-8'))).hexdigest()
 
-        all_languages = get_languages(country['languages'])
-        encrypted_languages= (hashlib.sha1(all_languages.encode('utf-8'))).hexdigest()
-
-        row = {
-            'Region':country['region'],
-            'Country':country['name']['common'],
-            'Languages':encrypted_languages,
-            'time': f"{round(((time.time() - now)*1000),4)} ms"
-        }
-        print(row)
-        # last_time = round(((time.time() - now)*1000),4)
-
-        
-            # print(f"{country['region']};{country['name']['common']};{encrypted_languages};{last_time} ms")
+            country_row = {
+                'Region':country['region'],
+                'Country':country['name']['common'],
+                'Languages':encrypted_languages,
+                'time': f"{round(((time.time() - now)*1000),4)} ms"
+            }
+            countries_dict.append(country_row)
             
-    
+    table_dataframe = pd.DataFrame(data= countries_dict)
+    print(table_dataframe)
 
-
+create_dataframe(countries_languages_data)
